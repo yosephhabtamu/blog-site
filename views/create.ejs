@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../public/layouts/header'); -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('../public/layouts/nav'); -%>
+       
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Create New Post</h1>
+                            <span class="subheading">Have questions? I have answers.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <!-- Main Content -->
+<main class="mb-4">
+<div class="container px-4 px-lg-5"> 
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-lg-8 col-md-10 mx-auto">
+    <form action="/post/new" method="POST">
+    <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+    <label>Title</label>
+    <input type="text" class="form-control" placeholder="Title"
+    id="title" name= "title" >
+    </div>
+    </div>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+        <label>Sub title</label>
+        <textarea rows="5" class="form-control" placeholder="Sub title"
+        id="body" name="subtitle" ></textarea>
+        </div>
+        </div>
+    <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+    <label>body</label>
+    <textarea rows="5" class="form-control" placeholder="Enter Body"
+    id="body" name="body" ></textarea>
+    </div>
+    </div>
+    <br>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary"
+    id="sendMessageButton">post</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+</main>
+        <%- include('../public/layouts/footer'); -%>
+        <!-- js -->
+<%- include('../public/layouts/script'); -%>
+       
+    </body>
+</html>
