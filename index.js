@@ -119,7 +119,7 @@ app.post('/auth/register', async (req,res)=>{
                 if(error){
                     return res.redirect('/auth/register')
                     }
-                res.redirect('/')
+                res.redirect('/auth/login')
                 })
                 
               

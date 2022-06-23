@@ -5,7 +5,7 @@ title: {},
 username:{},
 subtitle: {}, 
 date: Date,
-body: {}
+body: String
 
 });
 const BlogPost = mongoose.model('BlogPost',BlogPostSchema);
