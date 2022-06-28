@@ -7,8 +7,10 @@ username:{
     required: true,
     unique: true
 },
-password: {}, 
-email: {},
+password: String,
+email: String,
+description:String
+
 });
 
 UserSchema.pre('save', function(next){

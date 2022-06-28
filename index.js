@@ -30,53 +30,25 @@ app.use("*", (req, res, next) => {
 app.use(express.static('public'))
 app.set('view engine','ejs')
 
-app.get('/', async (req,res)=>{
-    const blogposts = await BlogPost.find({})
-    await res.render('index',{
-        blogposts,user
-    })
-    })
-// app.get('/contact', async (req,res)=>{
-//     await res.render('contact')
-//     })
-// app.get('/about', async (req,res)=>{
-//     await res.render('about')
-//     })
-app.get('/post/new', async (req,res)=>{
-    if(req.session.userId){
-        return res.render("create",{user});
-        }
-        res.redirect('/auth/login')
-    })
+const homeController = require('./controller/home')
+app.get('/',homeController)
+const contactController = require('./controller/contact')
+app.get('/contact', contactController)
+const aboutController = require('./controller/about')
+app.get('/about', aboutController)
+const newpostController= require('./controller/post')
+app.get('/post/new', newpostController)
+const commentcontroller = require('./controller/postcomment')
+app.post('/comment/:id', commentcontroller)
+const onePostController = require('./controller/onePost')
+app.get('/post/:id',onePostController)
 
-app.get('/post/:id',async (req,res)=>{
-    const blogpost = await BlogPost.findById(req.params.id)
-res.render('post',{
-blogpost,user
-})
-    })
-app.get('/comment',(req,res)=>{
-    res.render('comment')
-    })
 // app.get('/comment',(req,res)=>{
 //         res.render('comment')
 //     })
-app.post('/post/new', async (req,res)=>{
-    const post = req.body
-    console.log(req.body)
-    await BlogPost.create({
-        username: post.username,
-        title : post.title,
-        body : post.body,
-        subtitle : post.subtitle,
-        date : Date.now()
-    },(error,blogpost) =>{
-        // console.log(error)
-        res.redirect('/')
-        })
-        
-      
-        })
+
+const createPostController = require('./controller/storepost')
+app.post('/post/new',createPostController )
 
 // user registration
 app.get('/auth/register', async (req,res)=>{
