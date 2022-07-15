@@ -4,6 +4,7 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
 const expressSession = require('express-session')
+const fileUpload = require('express-fileupload')
 
 const BlogPost = require('./models/blogpost.js')
 const user = require('./models/user.js')
@@ -13,6 +14,7 @@ const app = new express()
 
 mongoose.connect('mongodb://localhost/blog_cyber', {useNewUrlParser: true});
 
+app.use(fileUpload())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(expressSession({

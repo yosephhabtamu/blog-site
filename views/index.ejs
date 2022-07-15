@@ -22,29 +22,47 @@
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <% for (var i = 0; i < blogposts.length; i++) { %>
-                    <div class="post-preview">
-                        <a href="post/<%= blogposts[i]._id%>">
-                            <h2 class="post-title"><%= blogposts[i].title %></h2>
+                <% for (var i = 0; i < blogposts.length; i++) { %>
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                              <p class="post-meta">
+                    <%= blogposts[i].date %>
+                </p>
+                            <a href="post/<%= blogposts[i]._id%>">
+                                <img src="../assets/img/home-bg.jpg" alt="" width="600"  height="170" style="border-radius: 6px; box-shadow:3px 3px 4px  #dedede; margin-right: 70px;" srcset="">
+                                <h2 class="post-title" style="display: flex;  justify-content:space-between;" >
+                                    <%= blogposts[i].title %>
+                           
+                                
+                            </h2>
                             <h3 class="post-subtitle"><%= blogposts[i].subtitle %></h3>
                         </a>
                         <p class="post-meta">
-                            Posted by
-                            <a href="#!"><%= blogposts[i].username %></a>
-                            <%= blogposts[i].date %>
-                            
-                        </p>
+                            <div style="display: flex; justify-content:space-between">
+                               
+                                <a href="#!">
+                                <img src="../assets/img/home-bg.jpg" alt="" width="40"  height="40" style="border-radius: 6px; border-radius: 100%; box-shadow:3px 3px 4px  #dedede; margin: 5px;" srcset="">
+                                <%= blogposts[i].username %></a>
+                                <div>
+                                    <a href="">
+                                        <img src="../assets/img/edit.png" alt="" width="20" height="20" style="margin-right: 20px;" srcset="">
+                                    </a>
+                                    <a href="">
+                                        <img src="../assets/img/delete.png" alt="" width="20" height="20" style="margin-right: 20px;" srcset="">
+                                    </a>
+                                </div>
+                            </div>
+                </p>
+              
                     </div>
                     <!-- Divider-->
-                    <hr class="my-4" />
-                    <% } %>
-                
+                    <hr  class="my-4" />
                     <!-- Pager-->
                     <!-- TODO:  -->
                     <!-- <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div> -->
                 </div>
+                <% } %>
             </div>
         </div>
         <!-- Footer-->

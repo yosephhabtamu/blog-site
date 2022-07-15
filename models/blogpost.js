@@ -10,6 +10,7 @@ username:{
 subtitle: String, 
 date: Date,
 body: String,
+image: String,
 comments:[String]
 
 
