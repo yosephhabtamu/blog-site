@@ -8,6 +8,7 @@ username:{
     unique: true
 },
 password: String,
+image: String,
 email: String,
 description:String
 

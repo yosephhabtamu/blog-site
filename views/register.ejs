@@ -25,7 +25,7 @@
 <div class="container px-4 px-lg-5"> 
     <div class="row gx-4 gx-lg-5 justify-content-center">
     <div class="col-lg-8 col-md-10 mx-auto">
-    <form action="/auth/register" method="POST">
+    <form action="/auth/register" method="POST" enctype="multipart/form-data">
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
     <label>username</label>
@@ -48,6 +48,14 @@
     </div>
     </div>
     <br>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+        <label>profile</label>
+        <input type="file" class="form-control" id="image"
+        name="image">
+        </div>
+        </div>
+        <br>
     <div class="form-group">
     <button type="submit" class="btn btn-primary"
     id="sendMessageButton">Register</button>

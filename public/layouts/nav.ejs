@@ -3,11 +3,11 @@
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href=""> 
             <% if(!username) { %>
-                <img src="../assets/img/home-bg.jpg" alt="" width="70" height="70" style="border-radius: 100%;margin-right: 20px;" srcset="">
+                <img src="../assets/img/default_image.png" alt="" width="70" height="70" style="border-radius: 100%;margin-right: 20px;" srcset="">
                 <span>Guest</span>
                 <% } %>
                 <% if(username) { %>
-                <img src="../assets/img/home-bg.jpg" alt="" width="70" height="70" style="border-radius: 100%; margin-right: 20px;" srcset="">
+                <img src="<%= profilePic %>" alt="" width="70" height="70" style="border-radius: 100%; margin-right: 20px;" srcset="">
                     <span><%= username %></span>
                     <% } %>
         </a>

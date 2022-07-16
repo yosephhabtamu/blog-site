@@ -20,13 +20,15 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(expressSession({
     secret: 'cyber assignment'}))
 
-global.loggedIn = null;
-global.username = null;
+global.loggedIn = null
+global.username = null
+global.userImage = null 
 app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
+    loggedIn = req.session.userId
     username = req.session.username
-    
+    profilePic = req.session.userImage
     console.log(username)
+    console.log('------------------------------'+profilePic)
     next()
     });
 app.use(express.static('public'))
@@ -53,12 +55,11 @@ const createPostController = require('./controller/storepost')
 app.post('/post/new',createPostController )
 
 // user registration
-app.get('/auth/register', async (req,res)=>{
-    if(req.session.userId){
-        return res.redirect('/') // if user logged in, redirect to home page
-        }
-    await res.render('register',{user})
-    })
+const {registerUser, registrationPage} = require('./controller/register')
+app.get('/auth/register',registrationPage)
+app.post('/auth/register', registerUser)
+
+
 app.get('/auth/login', async (req,res)=>{
         await res.render('login',{user})
         })
@@ -67,10 +68,12 @@ app.post('/auth/login',async  (req, res) =>{
     user.findOne({username:username}, (error,user) => {
     if (user){
     bcrypt.compare(password, user.password, (error, same) =>{
-    if(same){ // if passwords match
-    // store user session, will talk about it later
+    if(same){ 
     req.session.userId = user._id
     req.session.username = user.username
+    req.session.userImage = user.image
+    console.log('username at login', user.username)
+    console.log('user image at login',user.image)
     res.redirect('/')
     }
     else{
@@ -82,22 +85,7 @@ res.redirect('/auth/login')
 }
 })})
 
-app.post('/auth/register', async (req,res)=>{
-            const newuser = req.body
-            console.log(req.body)
-            await user.create({
-                username: newuser.username,
-                email : newuser.email,
-                password : newuser.password,
-            },(error,blogpost) =>{
-                if(error){
-                    return res.redirect('/auth/register')
-                    }
-                res.redirect('/auth/login')
-                })
-                
-              
-                })
+
 app.listen(4000, ()=>{
 console.log('App listening on port 4000')
 })
