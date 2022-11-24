@@ -1,38 +1,34 @@
-const user = require('../models/user')
-const path = require('path')
+const user = require('../models/userInfo')
+const axios = require('axios')
 
-async function registrationPage (req,res){
-    if(req.session.userId){
-        return res.redirect('/') // if user logged in, redirect to home page
-        }
-    await res.render('register',{username})
-    }
-async function registerUser (req,res){
-    console.log(req.files)
-    if (req.files != null) {
-        
-        let image = req.files.image
-        console.log(req.body)        
+
+
+module.exports = async (req,res)=>{
+    try {
         const newuser = req.body
-    image.mv(path.resolve(__dirname, '../public/profilePic/', image.name),
-    async function (error){
-        await user.create({
-            username: newuser.username,
-            email : newuser.email,
-            password : newuser.password,
-            image: `/profilePic/${image.name}`,
+        
+        const user = await axios.post('http://localhost:5000/api/users/signup/', newuser)
+        
+       console.log(user)
+        req.session.userId = user.data.id
+        req.session.userPayload = req.body
+        res.redirect('/aboutForm')
+    
+        
+    } catch (error) {
+        console.log(error.response.data)
+        const errors = error.response.data.errors
+        req.session.userPayload = req.body
+     
+        req.session.errors = errors
+        await res.redirect('/auth/register')
+        console.log(error)
+        
+    }
+   
+   
+  
+    
 
-        },(error) =>{
-            if(error){
-                console.error(error)
-                return res.redirect('/auth/register')
-
-                }
-            res.redirect('/auth/login')
-            }) 
-
-    } )}
-       
-        } 
-
-module.exports = {registrationPage, registerUser}
+      
+        }

@@ -25,37 +25,46 @@
 <div class="container px-4 px-lg-5"> 
     <div class="row gx-4 gx-lg-5 justify-content-center">
     <div class="col-lg-8 col-md-10 mx-auto">
-    <form action="/auth/register" method="POST" enctype="multipart/form-data">
+
+    <form action="/auth/register" method="POST">
+
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
-    <label>username</label>
-    <input type="text" class="form-control" placeholder="username"
-    id="username" name= "username" >
+    <label>User Name</label>
+    <input type="text" class="form-control" placeholder="User Name"
+    id="userName" name= "userName" value="<%= userPayload?.userName %>">
+    <div style="font-size: 10px;color: rgb(170, 62, 62);">
+
+    <%= errors?.find(item=>item.field === 'userName')?.message %>
     </div>
+</input>
     </div>
+  
+    </div>
+
     <div class="control-group">
         <div class="form-group floating-label-form-group controls">
         <label>Email</label>
         <input type="email" rows="5" class="form-control" placeholder="Email"
-         id="email" name="email" ></input>
+         id="email" name="email" value="<%= userPayload?.email %>">
+     
+         <div style="font-size: 10px;color: rgb(170, 62, 62);">
+         <%= errors?.find(item=>item.field === 'email')?.message %>
+        </div>
+        </input>
         </div>
         </div>
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
     <label>Password</label>
     <input type="password" rows="5" class="form-control" placeholder="password"
-    id="password" name="password" ></input>
+    id="password" name="password" value="<%= userPayload?.password %>">
+    <div style="font-size: 10px;color: rgb(170, 62, 62);">
+        <%= errors?.find(item=>item.field === 'password')?.message %></input>
+    </div>
     </div>
     </div>
     <br>
-    <div class="control-group">
-        <div class="form-group floating-label-form-group controls">
-        <label>profile</label>
-        <input type="file" class="form-control" id="image"
-        name="image">
-        </div>
-        </div>
-        <br>
     <div class="form-group">
     <button type="submit" class="btn btn-primary"
     id="sendMessageButton">Register</button>

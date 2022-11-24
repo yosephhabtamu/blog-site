@@ -4,13 +4,15 @@ const BlogPostSchema = new Schema({
 title: String,
 username:{
     type:String,
-    unique: true,
     required:true
 },
 subtitle: String, 
 date: Date,
 body: String,
-image: String,
+image:{
+    type:String,
+    default:'/img/default.png'
+},
 comments:[String]
 
 

@@ -7,13 +7,13 @@
         <%- include('../public/layouts/nav'); -%>
        
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+        <header class="masthead" style="background-image: url('/assets/img/createPost.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="page-heading">
                             <h1>Create New Post</h1>
-                            <span class="subheading">Have questions? I have answers.</span>
+                            <span class="subheading">Share your thoughts with the world.</span>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,13 @@
     <div class="form-group floating-label-form-group controls">
     <label>Title</label>
     <input type="text" class="form-control" placeholder="Title"
-    id="title" name= "title" >
+    id="title" name= "title" > 
+    <div style="font-size: 10px;color: rgb(170, 62, 62);">
+
+        <%= errors?.find(item=>item.param === 'title')?.msg %>
+        </div>
+    
+</input>
     </div>
     </div>
     <div class="control-group">
@@ -38,8 +44,12 @@
         <label>Sub title</label>
         <textarea rows="5" class="form-control" placeholder="Sub title"
         id="body" name="subtitle" ></textarea>
-        </div>
-        </div>
+</div>
+</div>
+<div style="font-size: 10px;color: rgb(170, 62, 62);">
+    <%= errors?.find(item=>item.param === 'subtitle')?.msg %>
+    </div>
+
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
     <label>body</label>
@@ -47,6 +57,10 @@
     id="body" name="body" ></textarea>
     </div>
     </div>
+    <div style="font-size: 10px;color: rgb(170, 62, 62);">
+
+        <%= errors?.find(item=>item.param === 'body')?.msg %>
+        </div>
     <br>
     <div class="control-group">
         <div class="form-group floating-label-form-group controls">
