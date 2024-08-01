@@ -14,7 +14,8 @@ const authmiddleware = require('./controller/authmiddleware')
 const redirectifauth = require('./controller/redirectIfAuth') 
 const {registerUser} = require("./controller/registerUser.js") 
 
-mongoose.connect("mongodb+srv://yosephhabtamu5:YTEvb2a4QZTe6CYy@rant.1vobtet.mongodb.net/?retryWrites=true&w=majority&appName=rant", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/blog-cyber", {useNewUrlParser: true});
+// mongoose.connect("mongodb+srv://yosephhabtamu5:YTEvb2a4QZTe6CYy@rant.1vobtet.mongodb.net/?retryWrites=true&w=majority&appName=rant", {useNewUrlParser: true});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -23,6 +24,7 @@ app.use(expressSession({
 
 global.loggedIn = null;
 global.userName = null;
+global.userId = Math.floor(1000 + Math.random() * 9000);
 app.use("*", (req, res, next) => {
     loggedIn = req.session.isLoggedIn;
     userName = req.session.userName
@@ -41,7 +43,7 @@ app.get('/contact', contactController)
 const aboutController = require('./controller/about')
 app.get('/about', aboutController)
 const commentcontroller = require('./controller/postcomment')
-app.post('/comment/:id',authmiddleware, commentcontroller)
+app.post('/comment/:id', commentcontroller)
 
 const {getpostscreen, storepost, getonepost}= require('./controller/post')
 app.get('/post/new',authmiddleware, getpostscreen)
