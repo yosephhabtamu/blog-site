@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../public/layouts/header'); -%>
-  
-    
+
     <body>
         <!-- Navigation-->
         <%- include('../public/layouts/nav'); -%>
+       
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+        <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="page-heading">
-                            <h1>About</h1>
-                            <span class="subheading">This is what I do.</span>
+                            <h1>welcome to Blogiverse</h1>
+                            <span class="subheading">Tell us a little about yourself</span>
                         </div>
                     </div>
                 </div>
@@ -24,14 +24,24 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>
-                            <%= about.about %>
-                        </p>
+                        <p>Describe your self in short!</p>
+                        <div class="my-5">
+    <form action="/aboutForm" method="POST" >
+
+        <div class="form-floating">
+            <textarea class="form-control" id="about"   name="about" placeholder="Input here" style="height: 12rem" data-sb-validations="required"></textarea>
+            <label for="about">About Me</label>
+        </div>
+        <br />
+                               
+        <button type="submit" class="btn btn-primary"
+        id="sendMessageButton">submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
-        <!-- Footer-->
         <%- include('../public/layouts/footer'); -%>
         <!-- js -->
 <%- include('../public/layouts/script'); -%>

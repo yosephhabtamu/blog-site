@@ -1,5 +1,8 @@
 const blogpost= require('../models/blogpost')
-// const username = require('../index')
+const path = require('path')
+const { validationResult } = require('express-validator')
+
+
 module.exports = async (req,res)=>{
     const post = req.body
     await blogpost.create({
