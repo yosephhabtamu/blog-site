@@ -14,7 +14,7 @@ const authmiddleware = require('./controller/authmiddleware')
 const redirectifauth = require('./controller/redirectIfAuth') 
 const {registerUser} = require("./controller/registerUser.js") 
 
-mongoose.connect('mongodb://localhost/blog_cyber', {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://yosephhabtamu5:YTEvb2a4QZTe6CYy@rant.1vobtet.mongodb.net/?retryWrites=true&w=majority&appName=rant", {useNewUrlParser: true});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -37,13 +37,6 @@ const homeController = require('./controller/home')
 app.get('/',homeController)
 const contactController = require('./controller/contact')
 app.get('/contact', contactController)
-
-const getAbout = require('./controller/getAbout')
-app.get('/about', getAbout)
-
-
-const getAboutForm = require('./controller/getAboutForm')
-app.get('/aboutForm', getAboutForm)
 
 const aboutController = require('./controller/about')
 app.get('/about', aboutController)
