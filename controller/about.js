@@ -1,4 +1,6 @@
 
 module.exports = async (req,res)=>{
-        await res.render('about', {username})
+        if(!userName) res.render('forbidden');
+        else
+        await res.render('about', {userName})
         }

@@ -10,25 +10,28 @@ const user = require('./models/user.js')
 
 const app = new express()
 
+const authmiddleware = require('./controller/authmiddleware')
+const redirectifauth = require('./controller/redirectIfAuth') 
+const {registerUser} = require("./controller/registerUser.js") 
 
 mongoose.connect('mongodb://localhost/blog_cyber', {useNewUrlParser: true});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(expressSession({
-    secret: 'cyber assignment'}))
+    secret: 'blogiverse is cool'}))
 
 global.loggedIn = null;
-global.username = null;
+global.userName = null;
 app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
-    username = req.session.username
-    
-    console.log(username)
+    loggedIn = req.session.isLoggedIn;
+    userName = req.session.userName
     next()
     });
 app.use(express.static('public'))
+// app.use(redirectifauth);
 app.set('view engine','ejs')
+
 
 const homeController = require('./controller/home')
 app.get('/',homeController)
@@ -36,19 +39,13 @@ const contactController = require('./controller/contact')
 app.get('/contact', contactController)
 const aboutController = require('./controller/about')
 app.get('/about', aboutController)
-const newpostController= require('./controller/post')
-app.get('/post/new', newpostController)
 const commentcontroller = require('./controller/postcomment')
-app.post('/comment/:id', commentcontroller)
-const onePostController = require('./controller/onePost')
-app.get('/post/:id',onePostController)
+app.post('/comment/:id',authmiddleware, commentcontroller)
 
-// app.get('/comment',(req,res)=>{
-//         res.render('comment')
-//     })
-
-const createPostController = require('./controller/storepost')
-app.post('/post/new',createPostController )
+const {getpostscreen, storepost, getonepost}= require('./controller/post')
+app.get('/post/new',authmiddleware, getpostscreen)
+app.get('/post/:id',getonepost)
+app.post('/post/new', authmiddleware,storepost )
 
 // user registration
 app.get('/auth/register', async (req,res)=>{
@@ -57,45 +54,15 @@ app.get('/auth/register', async (req,res)=>{
         }
     await res.render('register',{user})
     })
-app.get('/auth/login', async (req,res)=>{
-        await res.render('login',{user})
-        })
-app.post('/auth/login',async  (req, res) =>{
-    const { username, password } = req.body;
-    user.findOne({username:username}, (error,user) => {
-    if (user){
-    bcrypt.compare(password, user.password, (error, same) =>{
-    if(same){ // if passwords match
-    // store user session, will talk about it later
-    req.session.userId = user._id
-    req.session.username = user.username
-    res.redirect('/')
-    }
-    else{
-    res.redirect('/auth/login')
-    }})
-}
-else{
-res.redirect('/auth/login')
-}
-})})
 
-app.post('/auth/register', async (req,res)=>{
-            const newuser = req.body
-            console.log(req.body)
-            await user.create({
-                username: newuser.username,
-                email : newuser.email,
-                password : newuser.password,
-            },(error,blogpost) =>{
-                if(error){
-                    return res.redirect('/auth/register')
-                    }
-                res.redirect('/auth/login')
-                })
-                
-              
-                })
+const {getlogin, loginuser} = require('./controller/loginuser')
+const {logout} = require("./controller/logout.js")
+app.get('/auth/login', getlogin)
+app.post('/auth/login',loginuser)
+app.get('/auth/logout', logout);
+
+app.post('/auth/register', registerUser)
+app.use((req, res) => res.render('notfound'))
 app.listen(4000, ()=>{
 console.log('App listening on port 4000')
 })
