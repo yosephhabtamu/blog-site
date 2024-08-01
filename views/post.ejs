@@ -12,11 +12,13 @@
                         <div class="post-heading">
                             <h1><%= blogpost.title %></h1>
                             <h2 class="subheading"><%= blogpost.subtitle %></h2>
-                            <span class="meta">
+                            <span class="meta text-sm">
                                 Posted by : 
-                                <a href="#!"><%= blogpost.username %></a>
+                                <a href="/about"><%= blogpost.username %></a>
                             <hr>
-                                <%= blogpost.date %>
+                                <h6>
+                                    <%= blogpost.date %>
+                                </h6>
                                 <hr>
                                 
                                 
@@ -36,7 +38,7 @@
 
                         <% for (var i = 0; i < comments.length; i++) { %>
                         <div class="post-preview">
-                        <h3 class="post-subtitle"><%= comments[i].username %></h3>
+                        <h6 class="post-subtitle"><%= comments[i].username %></h6>
                         <p class="post-meta" > <%= comments[i].message %> </p>
                     </div>
                     <hr class="my-4" />

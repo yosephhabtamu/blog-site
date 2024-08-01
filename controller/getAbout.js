@@ -1,7 +1,5 @@
-const userInfo = require('../models/userInfo')
-
+const User = require("../models/user");  
 module.exports = async (req,res)=>{
-    const about = await userInfo.findOne({userName: userPayload.userName})
-    console.log('found about', about)
-    res.render('about',{about, userName: userPayload?.userName})
+    const user = await User.findOne({userName})
+    res.render('about',{about:user.description, userName})
 }

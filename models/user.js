@@ -16,6 +16,7 @@ description:String
 UserSchema.pre('save', function(next){
     const user = this
     bcrypt.hash(user.password, 10, (error, hash) => {
+    if(error) throw new Error(error.message);
     user.password = hash
     next()
     })

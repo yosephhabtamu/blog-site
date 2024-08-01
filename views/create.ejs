@@ -25,17 +25,12 @@
 <div class="container px-4 px-lg-5"> 
     <div class="row gx-4 gx-lg-5 justify-content-center">
     <div class="col-lg-8 col-md-10 mx-auto">
-    <form action="/post/new" method="POST" enctype="multipart/form-data">
+    <form action="/post/new" method="POST">
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
     <label>Title</label>
     <input type="text" class="form-control" placeholder="Title"
-    id="title" name= "title" > 
-    <div style="font-size: 10px;color: rgb(170, 62, 62);">
-
-        <%= errors?.find(item=>item.param === 'title')?.msg %>
-        </div>
-    
+    id="title" name= "title" >
 </input>
     </div>
     </div>
@@ -46,9 +41,7 @@
         id="body" name="subtitle" ></textarea>
 </div>
 </div>
-<div style="font-size: 10px;color: rgb(170, 62, 62);">
-    <%= errors?.find(item=>item.param === 'subtitle')?.msg %>
-    </div>
+
 
     <div class="control-group">
     <div class="form-group floating-label-form-group controls">
@@ -57,10 +50,7 @@
     id="body" name="body" ></textarea>
     </div>
     </div>
-    <div style="font-size: 10px;color: rgb(170, 62, 62);">
-
-        <%= errors?.find(item=>item.param === 'body')?.msg %>
-        </div>
+    
     <br>
     <div class="control-group">
         <div class="form-group floating-label-form-group controls">

@@ -7,6 +7,7 @@ async function registerUser (req,res) {
         userName: newuser.userName,
         email : newuser.email,
         password : newuser.password,
+        description:newuser.description
     },(error,blogpost) =>{
         if(error){
             console.error(error);

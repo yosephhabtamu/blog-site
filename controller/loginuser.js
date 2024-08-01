@@ -2,10 +2,18 @@ const bcrypt = require('bcrypt')
 const user = require('../models/user')
 
 async function loginuser(req,res) {
-    const { username, password } = req.body;
-    user.findOne({userName:username}, (error,user) => {
+    const { userName, password } = req.body;
+    user.findOne({userName}, (error,user) => {
+        if(error){
+            console.error(error);
+            return;
+        }
     if (user){
     bcrypt.compare(password, user.password, (error, same) =>{
+        if(error){
+            console.error(error);
+            return;
+        }
     if(same){
     req.session.userId = user._id
     req.session.userName = user.userName
@@ -13,7 +21,7 @@ async function loginuser(req,res) {
     res.redirect('/')
     }
     else{
-        console.error(error);
+        console.error("invalid username or Password");
     res.redirect('/auth/login')
     }})
 }

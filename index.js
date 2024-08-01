@@ -4,11 +4,9 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
 const expressSession = require('express-session')
-const {body, CustomValidator, validationResult} = require('express-validator')
-const fileUpload = require('express-fileupload')
 
 const BlogPost = require('./models/blogpost.js')
-const user = require('./models/userInfo.js')
+const User = require('./models/user.js');
 
 const app = new express()
 
@@ -18,7 +16,6 @@ const {registerUser} = require("./controller/registerUser.js")
 
 mongoose.connect('mongodb://localhost/blog_cyber', {useNewUrlParser: true});
 
-app.use(fileUpload())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(expressSession({
@@ -63,7 +60,7 @@ app.get('/auth/register', async (req,res)=>{
     if(req.session.userId){
         return res.redirect('/') // if user logged in, redirect to home page
         }
-    await res.render('register',{user})
+    await res.render('register')
     })
 
 const {getlogin, loginuser} = require('./controller/loginuser')

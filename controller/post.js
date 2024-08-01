@@ -16,6 +16,7 @@ async function getonepost(req,res) {
 
 async function storepost (req,res){
     const post = req.body
+    console.log(post);
     await blogPost.create({
         username: userName ,
         title : post.title,
