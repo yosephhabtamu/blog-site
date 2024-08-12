@@ -14,8 +14,8 @@ const authmiddleware = require('./controller/authmiddleware')
 const redirectifauth = require('./controller/redirectIfAuth') 
 const {registerUser} = require("./controller/registerUser.js") 
 
-mongoose.connect("mongodb://localhost:27017/blog-cyber", {useNewUrlParser: true});
-// mongoose.connect("mongodb+srv://yosephhabtamu5:YTEvb2a4QZTe6CYy@rant.1vobtet.mongodb.net/?retryWrites=true&w=majority&appName=rant", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/blog-cyber", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://yosephhabtamu5:YTEvb2a4QZTe6CYy@rant.1vobtet.mongodb.net/?retryWrites=true&w=majority&appName=rant", {useNewUrlParser: true});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
